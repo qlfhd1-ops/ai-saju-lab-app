@@ -1,65 +1,60 @@
-import Image from "next/image";
-
-export default function Home() {
+export default function Page() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: 24 }}>
+      <div style={{ maxWidth: 720, width: "100%" }}>
+        <h1 style={{ fontSize: 36, margin: 0 }}>AI 사주 랩 (AI Saju Lab.)</h1>
+        <p style={{ marginTop: 10, fontSize: 18, opacity: 0.85 }}>
+          오늘을 살아가는 당신을 응원합니다.
+        </p>
+
+        <div style={{ marginTop: 24, padding: 16, border: "1px solid rgba(255,255,255,0.15)", borderRadius: 12 }}>
+          <p style={{ margin: 0, lineHeight: 1.7, opacity: 0.9 }}>
+            <b>팁</b> : 사주(四柱)란 사람이 태어난 연(年), 월(月), 일(日), 시(時)의 네 가지 기둥을 현실과 함께 해석하는 도구입니다.
+            좋은 기운일 때는 거만하지 않고 기운을 받을 그릇을 크게 키우고, 나쁜 기운일 때는 위험을 대비해 더욱 조심하여
+            위기를 기회로 만드는 시간을 가져야 합니다. 노력과 행동이 운을 만듭니다.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        <div style={{ marginTop: 24, display: "grid", gap: 12 }}>
+          <label style={{ display: "grid", gap: 6 }}>
+            Birth date (YYYY-MM-DD)
+            <input
+              placeholder="1990-01-01"
+              style={{
+                padding: 12,
+                borderRadius: 10,
+                border: "1px solid rgba(255,255,255,0.2)",
+                background: "transparent",
+                color: "inherit",
+              }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </label>
+
+          <label style={{ display: "grid", gap: 6 }}>
+            Gender
+            <select
+              style={{
+                padding: 12,
+                borderRadius: 10,
+                border: "1px solid rgba(255,255,255,0.2)",
+                background: "transparent",
+                color: "inherit",
+              }}
+            >
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </label>
+
+          <button style={{ padding: 12, borderRadius: 10, border: 0, cursor: "pointer" }}>
+            Get Today&apos;s Fortune
+          </button>
+
+          <p style={{ marginTop: 6, opacity: 0.7 }}>
+            입력된 정보는 해석이 끝나면 별이 되어 우주로 사라집니다.
+          </p>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
