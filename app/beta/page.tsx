@@ -72,146 +72,48 @@ export default function BetaPage() {
     setResult("");
   };
 
+  if (!authorized) {
   return (
     <main style={{ minHeight: "100vh", padding: 40, color: "#fff" }}>
-      <h1 style={{ fontSize: 40, marginBottom: 8 }}>AI Saju Lab · Beta</h1>
-      <p style={{ opacity: 0.8, marginBottom: 24 }}>
-        베타 입력 폼(테스트). 결과는 아직 더미이며, 다음 단계에서 AI를 연결합니다.
+      <h1 style={{ fontSize: 36, marginBottom: 12 }}>
+        AI Saju Lab · Beta
+      </h1>
+      <p style={{ opacity: 0.75, marginBottom: 24 }}>
+        이 페이지는 초대된 사용자만 접근 가능합니다.
       </p>
 
       <div
         style={{
-          maxWidth: 720,
+          maxWidth: 420,
           padding: 20,
           borderRadius: 16,
           border: "1px solid rgba(255,255,255,0.12)",
-          background: "rgba(255,255,255,0.04)",
-          backdropFilter: "blur(10px)",
+          background: "rgba(255,255,255,0.05)",
         }}
       >
-        {/* 이름 */}
-        <label style={{ display: "block", marginBottom: 14 }}>
-          <div style={{ marginBottom: 6, opacity: 0.9 }}>이름 *</div>
+        <label style={{ display: "block", marginBottom: 12 }}>
+          <div style={{ marginBottom: 6 }}>초대 코드</div>
           <input
-            value={form.name}
-            onChange={(e) => onChange("name", e.target.value)}
-            placeholder="예: 홍길동"
+            value={invite}
+            onChange={(e) => setInvite(e.target.value)}
+            placeholder="초대 코드를 입력하세요"
             style={inputStyle}
           />
         </label>
 
-        {/* 생년월일 / 태어난 시간 */}
-        <div style={{ display: "flex", gap: 12, marginBottom: 14 }}>
-          <label style={{ flex: 1 }}>
-            <div style={{ marginBottom: 6, opacity: 0.9 }}>생년월일 *</div>
-            <input
-              value={form.birthDate}
-              onChange={(e) => onChange("birthDate", e.target.value)}
-              placeholder="YYYY-MM-DD"
-              style={inputStyle}
-            />
-          </label>
-          <label style={{ flex: 1 }}>
-            <div style={{ marginBottom: 6, opacity: 0.9 }}>태어난 시간(선택)</div>
-            <input
-              value={form.birthTime}
-              onChange={(e) => onChange("birthTime", e.target.value)}
-              placeholder="HH:MM"
-              style={inputStyle}
-            />
-          </label>
-        </div>
-
-        {/* 성별 */}
-        <label style={{ display: "block", marginBottom: 14 }}>
-          <div style={{ marginBottom: 6, opacity: 0.9 }}>성별</div>
-          <select
-            value={form.gender}
-            onChange={(e) => onChange("gender", e.target.value as any)}
-            style={inputStyle}
-          >
-            <option value="female">여성</option>
-            <option value="male">남성</option>
-            <option value="other">기타</option>
-          </select>
-        </label>
-
-        {/* 지역 */}
-        <label style={{ display: "block", marginBottom: 14 }}>
-          <div style={{ marginBottom: 6, opacity: 0.9 }}>지역(선택)</div>
-          <input
-            value={form.location}
-            onChange={(e) => onChange("location", e.target.value)}
-            placeholder="예: 부산 / 서울 / 창원"
-            style={inputStyle}
-          />
-        </label>
-
-        {/* 메모 */}
-        <label style={{ display: "block", marginBottom: 18 }}>
-          <div style={{ marginBottom: 6, opacity: 0.9 }}>메모(선택)</div>
-          <textarea
-            value={form.notes}
-            onChange={(e) => onChange("notes", e.target.value)}
-            placeholder="예: 요즘 고민/목표, 알고 싶은 질문 등"
-            style={{ ...inputStyle, minHeight: 90, resize: "vertical" }}
-          />
-        </label>
-
-        {/* 버튼 */}
-        <div style={{ display: "flex", gap: 10 }}>
-          <button
-            onClick={onSubmit}
-            disabled={!canSubmit}
-            style={{
-              ...buttonStyle,
-              opacity: canSubmit ? 1 : 0.45,
-              cursor: canSubmit ? "pointer" : "not-allowed",
-            }}
-          >
-            결과 보기
-          </button>
-          <button onClick={onReset} style={{ ...buttonStyle, opacity: 0.8 }}>
-            초기화
-          </button>
-        </div>
-      </div>
-
-      {/* 결과 */}
-      {result && (
-        <pre
-          style={{
-            maxWidth: 720,
-            marginTop: 18,
-            padding: 18,
-            borderRadius: 16,
-            border: "1px solid rgba(255,255,255,0.12)",
-            background: "rgba(0,0,0,0.35)",
-            whiteSpace: "pre-wrap",
-            lineHeight: 1.55,
+        <button
+          onClick={() => {
+            if (invite === INVITE_CODE) {
+              setAuthorized(true);
+            } else {
+              alert("초대 코드가 올바르지 않습니다.");
+            }
           }}
+          style={{ ...buttonStyle, width: "100%" }}
         >
-          {result}
-        </pre>
-      )}
+          입장하기
+        </button>
+      </div>
     </main>
   );
 }
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "12px 12px",
-  borderRadius: 12,
-  border: "1px solid rgba(255,255,255,0.18)",
-  background: "rgba(255,255,255,0.04)",
-  color: "#fff",
-  outline: "none",
-};
-
-const buttonStyle: React.CSSProperties = {
-  padding: "12px 14px",
-  borderRadius: 12,
-  border: "1px solid rgba(255,255,255,0.18)",
-  background: "rgba(255,255,255,0.08)",
-  color: "#fff",
-};
