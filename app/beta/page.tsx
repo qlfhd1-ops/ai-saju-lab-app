@@ -1,18 +1,22 @@
 "use client";
 
 import { useMemo, useState } from "react";
+
 const INVITE_CODE = "AI-SAJU-BETA";
 
 type FormState = {
   name: string;
-  birthDate: string; // YYYY-MM-DD
-  birthTime: string; // HH:MM
+  birthDate: string;
+  birthTime: string;
   gender: "male" | "female" | "other";
   location: string;
   notes: string;
 };
 
 export default function BetaPage() {
+  const [invite, setInvite] = useState("");
+  const [authorized, setAuthorized] = useState(false);
+
   const [form, setForm] = useState<FormState>({
     name: "",
     birthDate: "",
@@ -25,8 +29,11 @@ export default function BetaPage() {
   const [result, setResult] = useState<string>("");
 
   const canSubmit = useMemo(() => {
-    return form.name.trim() && form.birthDate.trim(); // 최소 조건: 이름 + 생년월일
+    return form.name.trim() && form.birthDate.trim();
   }, [form.name, form.birthDate]);
+
+  // 이하 기존 코드 그대로
+
 
   const onChange = (
     key: keyof FormState,
