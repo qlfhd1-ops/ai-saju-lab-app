@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+const INVITE_CODE = "AI-SAJU-BETA";
 
 type FormState = {
   name: string;
