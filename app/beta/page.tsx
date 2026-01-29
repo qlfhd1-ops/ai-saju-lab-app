@@ -2,7 +2,10 @@
 
 import { useMemo, useState } from "react";
 
-const INVITE_CODE = "AI-SAJU-BETA";
+// ✅ 초대코드를 .env.local에서 읽고, 없으면 기본값 사용
+// .env.local 예: NEXT_PUBLIC_INVITE_CODE=AI-SAJU-BETA
+const INVITE_CODE =
+  (process.env.NEXT_PUBLIC_INVITE_CODE || "").trim() || "AI-SAJU-BETA";
 
 type TabKey = "today" | "saju" | "match";
 
@@ -253,7 +256,7 @@ export default function BetaPage() {
               <input
                 value={invite}
                 onChange={(e) => setInvite(e.target.value)}
-                placeholder="AI-SAJU-BETA"
+                placeholder={INVITE_CODE}
                 style={styles.input}
               />
             </div>
@@ -268,12 +271,22 @@ export default function BetaPage() {
               >
                 입장하기 →
               </button>
-              <a href="/" style={{ ...styles.btn(false), textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
+              <a
+                href="/"
+                style={{
+                  ...styles.btn(false),
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                }}
+              >
                 메인으로
               </a>
             </div>
 
-            <p style={styles.hint}>* 초대 코드는 테스트용입니다. 추후 환경변수/관리자 설정으로 바꿀 수 있어요.</p>
+            <p style={styles.hint}>
+              * 초대 코드는 테스트용입니다. (.env.local의 NEXT_PUBLIC_INVITE_CODE로 바꿀 수 있어요)
+            </p>
           </section>
         </div>
       </main>
@@ -380,7 +393,12 @@ export default function BetaPage() {
             </div>
 
             <div style={styles.row}>
-              <button style={{ ...styles.btn(true), opacity: canSubmit ? 1 : 0.5, cursor: canSubmit ? "pointer" : "not-allowed" }}
+              <button
+                style={{
+                  ...styles.btn(true),
+                  opacity: canSubmit ? 1 : 0.5,
+                  cursor: canSubmit ? "pointer" : "not-allowed",
+                }}
                 onClick={() => canSubmit && onSubmit()}
                 disabled={!canSubmit}
               >
@@ -389,7 +407,15 @@ export default function BetaPage() {
               <button style={styles.btn(false)} onClick={onReset}>
                 초기화
               </button>
-              <a href="/" style={{ ...styles.btn(false), textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
+              <a
+                href="/"
+                style={{
+                  ...styles.btn(false),
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                }}
+              >
                 메인
               </a>
             </div>
@@ -414,7 +440,11 @@ export default function BetaPage() {
 
             <div style={styles.row}>
               <button
-                style={{ ...styles.btn(false), opacity: result ? 1 : 0.5, cursor: result ? "pointer" : "not-allowed" }}
+                style={{
+                  ...styles.btn(false),
+                  opacity: result ? 1 : 0.5,
+                  cursor: result ? "pointer" : "not-allowed",
+                }}
                 onClick={() => result && onCopy()}
                 disabled={!result}
               >
