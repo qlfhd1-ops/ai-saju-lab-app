@@ -2,11 +2,6 @@
 
 import { useMemo, useState } from "react";
 
-// ✅ 초대코드를 .env.local에서 읽고, 없으면 기본값 사용
-// .env.local 예: NEXT_PUBLIC_INVITE_CODE=AI-SAJU-BETA
-const INVITE_CODE =
-  (process.env.NEXT_PUBLIC_INVITE_CODE || "").trim() || "AI-SAJU-BETA";
-
 type TabKey = "today" | "saju" | "match";
 
 type FormState = {
