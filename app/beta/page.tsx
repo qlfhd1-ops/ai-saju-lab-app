@@ -251,7 +251,7 @@ export default function BetaPage() {
               <input
                 value={invite}
                 onChange={(e) => setInvite(e.target.value)}
-                placeholder={INVITE_CODE}
+                placeholder="초대 코드를 입력하세요"
                 style={styles.input}
               />
             </div>
