@@ -33,28 +33,31 @@ export default function BetaPage() {
     return form.birthDate.trim().length >= 8;
   }, [form.birthDate]);
 
-  const verifyInvite = async () => {
-    setChecking(true);
-    try {
-      const res = await fetch("/api/invite/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: invite }),
-      });
+const verifyInvite = async () => {
+  setInviteError("");
+  setChecking(true);
 
-      const data = await res.json().catch(() => ({}));
-      if (res.ok && data?.ok) {
-        setAuthorized(true);
-        return;
-      }
+  try {
+    const res = await fetch("/api/invite/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: invite }),
+    });
 
-      alert("초대 코드가 올바르지 않습니다.");
-    } catch (e) {
-      alert("서버 확인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-    } finally {
-      setChecking(false);
+    const data = await res.json().catch(() => ({}));
+
+    if (res.ok && data?.ok) {
+      setAuthorized(true);
+      return;
     }
-  };
+
+    setInviteError("초대 코드가 올바르지 않습니다.");
+  } catch {
+    setInviteError("서버 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+  } finally {
+    setChecking(false);
+  }
+};
 
   const onSubmit = async () => {
     if (!canSubmit) {
